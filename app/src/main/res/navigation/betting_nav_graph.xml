@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/betting_nav_graph"
+    app:startDestination="@id/bettingHomeFragment">
+
+    <fragment
+        android:id="@+id/bettingHomeFragment"
+        android:name="com.crushtech.excelfixedmatches.ui.fragments.BettingHomeFragment"
+        android:label="BettingHomeFragment" >
+        <action
+            android:id="@+id/action_bettingHomeFragment_to_freeTipsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:destination="@id/freeTipsFragment" />
+        <action
+            android:id="@+id/action_bettingHomeFragment_to_vipTipsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:destination="@id/vipTipsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/freeTipsFragment"
+        android:name="com.crushtech.excelfixedmatches.ui.fragments.FreeTipsFragment"
+        android:label="Free Tips" />
+    <fragment
+        android:id="@+id/vipTipsFragment"
+        android:name="com.crushtech.excelfixedmatches.ui.fragments.VipTipsFragment"
+        android:label="Vip Tips" />
+</navigation>

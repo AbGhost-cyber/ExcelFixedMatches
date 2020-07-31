@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.crushtech.excelfixedmatches.R
 import com.crushtech.excelfixedmatches.adapter.VipItemsAdapter
+import com.crushtech.excelfixedmatches.models.SpacesItemDecoration
 import com.crushtech.excelfixedmatches.ui.BettingMainActivity
 import kotlinx.android.synthetic.main.vip_tips_layout.*
 
@@ -19,12 +21,14 @@ class VipTipsFragment : Fragment(R.layout.vip_tips_layout) {
         (activity as BettingMainActivity).supportActionBar?.show()
         initVipItems()
 
-        vipItemsAdapter = VipItemsAdapter()
+        vipItemsAdapter = VipItemsAdapter(this)
         vipItemsAdapter.differ.submitList(vipItemsList!!)
 
         viprecView.apply {
             adapter = vipItemsAdapter
-            layoutManager = GridLayoutManager(requireContext(), 2)
+            layoutManager = GridLayoutManager(requireContext(),
+                2)
+            addItemDecoration(SpacesItemDecoration(10))
         }
 
     }

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="20dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginStart="5dp"
+    android:layout_marginEnd="5dp"
+    android:layout_marginBottom="5dp"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/siblingCardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/colorPrimaryDark">
+
+            <TextView
+                android:id="@+id/datePlusVipNamePlusOddPlusWon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-black"
+                android:padding="10dp"
+                android:text="22.07.20 HT/FT \nVIP 50.00 Odds WON"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="23sp"
+                android:textStyle="bold" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/leagueLogo"
+            android:layout_width="50dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/siblingCardView"
+            android:src="@drawable/bettinglogo" />
+
+        <TextView
+            android:id="@+id/league_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/siblingCardView"
+            android:layout_centerInParent="true"
+            android:fontFamily="sans-serif-black"
+            android:padding="20dp"
+            android:textSize="17sp"
+            android:text="Turkey 1.League Play Off-2020"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/siblingCardView"
+            android:layout_alignParentEnd="true"
+            android:padding="20dp"
+            android:id="@+id/matchState"
+            android:src="@drawable/match_won" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="BursaporA vs Demirspor"
+            android:textSize="17sp"
+            android:padding="10dp"
+            android:id="@+id/teams"
+            android:fontFamily="@font/bree_serif"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/black"
+            android:layout_below="@id/league_Name"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="HT/FT X/X"
+            android:textSize="15sp"
+            android:padding="20dp"
+            android:id="@+id/fixtures_inOdds"
+            android:fontFamily="sans-serif-black"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_below="@id/teams"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="5.00"
+            android:textSize="15sp"
+            android:padding="20dp"
+            android:id="@+id/odds"
+            android:fontFamily="sans-serif-black"
+            android:layout_alignParentEnd="true"
+            android:textColor="@android:color/black"
+            android:layout_below="@id/league_Name"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/HT_FT_scores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/teams"
+            android:layout_alignParentEnd="true"
+            android:fontFamily="sans-serif-black"
+            android:padding="20dp"
+            android:text="1-1\n3-3"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

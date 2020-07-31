@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "473221136796",
+    "firebase_url": "https://excel-fixed-matches.firebaseio.com",
+    "project_id": "excel-fixed-matches",
+    "storage_bucket": "excel-fixed-matches.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:473221136796:android:3a056d53849533240cc859",
+        "android_client_info": {
+          "package_name": "com.crushtech.excelfixedmatches"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "473221136796-lcnrsraiu0ksfku8mkpiie7n0f35cr2j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg5aG_hbVsQObA9OgeUGG6c1_ZtRtdc6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "473221136796-lcnrsraiu0ksfku8mkpiie7n0f35cr2j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

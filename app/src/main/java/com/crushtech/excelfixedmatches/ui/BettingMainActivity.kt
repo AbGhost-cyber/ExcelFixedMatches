@@ -3,6 +3,7 @@ package com.crushtech.excelfixedmatches.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -10,12 +11,20 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.crushtech.excelfixedmatches.R
+import com.crushtech.excelfixedmatches.repos.BettingRepos
+import com.crushtech.excelfixedmatches.viemodels.BettingViewModelFactory
+import com.crushtech.excelfixedmatches.viemodels.BettingViewmodel
+import com.google.firebase.FirebaseApp
 import kotlinx.android.synthetic.main.activity_main.*
 
 class BettingMainActivity : AppCompatActivity() {
+     lateinit var bettingViewModel: BettingViewmodel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val bettingRepos = BettingRepos()
+        val viewModelProviderFactory = BettingViewModelFactory(bettingRepos,application)
+        bettingViewModel = ViewModelProvider(this,viewModelProviderFactory).get(BettingViewmodel::class.java)
 
         val navController = Navigation.findNavController(this, R.id.bettingNavHostFragment)
         NavigationUI.setupActionBarWithNavController(this,navController)

@@ -26,7 +26,6 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
                 android:padding="10dp"
-                android:text="22.07.20 HT/FT \nVIP 50.00 Odds WON"
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="23sp"
@@ -63,7 +62,6 @@
             android:src="@drawable/match_won" />
         <TextView
             android:layout_width="wrap_content"
-            android:text="BursaporA vs Demirspor"
             android:textSize="17sp"
             android:padding="10dp"
             android:id="@+id/teams"
@@ -74,7 +72,6 @@
             android:layout_height="wrap_content"/>
         <TextView
             android:layout_width="wrap_content"
-            android:text="HT/FT X/X"
             android:textSize="15sp"
             android:padding="20dp"
             android:id="@+id/fixtures_inOdds"
@@ -85,7 +82,6 @@
             android:layout_height="wrap_content"/>
         <TextView
             android:layout_width="wrap_content"
-            android:text="5.00"
             android:textSize="15sp"
             android:padding="20dp"
             android:id="@+id/odds"
@@ -103,7 +99,6 @@
             android:layout_alignParentEnd="true"
             android:fontFamily="sans-serif-black"
             android:padding="20dp"
-            android:text="1-1\n3-3"
             android:textColor="@android:color/black"
             android:textSize="15sp" />
 

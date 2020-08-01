@@ -2,4 +2,7 @@
     <string name="app_name">Excel Fixed Matches</string>
     <string name="app_name_1">EXCEL FIXED MATCHES \n101% DAILY TIPS</string>
     <string name="refresh_fb">REFRESH</string>
+    <string name="msg_token_fmt">value gotten</string>
+    <string name="msg_subscribed">subbed</string>
+    <string name="msg_subscribe_failed">notSubbed</string>
 </resources>

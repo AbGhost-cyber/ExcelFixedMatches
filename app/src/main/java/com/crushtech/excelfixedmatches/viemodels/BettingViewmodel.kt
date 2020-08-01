@@ -20,9 +20,11 @@ class BettingViewmodel(
         return mutableData
     }
 
-    fun refreshData(){
+    fun refreshData():LiveData<MutableList<VipMatchesItem>>{
         repos = BettingRepos()
-        mutableData = repos.getCorrectScoresVIPDataFromFB()
-                as MutableLiveData<MutableList<VipMatchesItem>>
+         repos.getCorrectScoresVIPDataFromFB().observeForever {
+            mutableData.value =it
+        }
+        return mutableData
     }
 }

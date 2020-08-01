@@ -38,21 +38,43 @@ class VipMatchesItemAdapter : RecyclerView.Adapter<VipMatchesItemAdapter.VipMatc
             Glide.with(context).load(items.leagueLogo).into(leagueLogo)
             league_Name.text = items.leagueName
             teams.text = "${items.teamOne} Vs ${items.teamTwo}"
-            when {
-                items.matchWon -> {
-                    matchState.setImageResource(R.drawable.match_won)
-                    datePlusVipNamePlusOddPlusWon.text =
-                        "${items.date} HT/FT  \nVIP ${items.odds} Odds WON"
+
+            if (!items.isMatchPlayed) {
+                matchState.setImageResource(R.drawable.match_not_played_icon)
+                datePlusVipNamePlusOddPlusWon.text = "${items.date} HT/FT VIP"
+                HT_FT_scores.text = null
+                HT_FT_scores.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    0,
+                    0,
+                    R.drawable.no_scores_icon,
+                    0
+                )
+            } else {
+                when {
+                    items.matchWon -> {
+                        matchState.setImageResource(R.drawable.match_won)
+                        datePlusVipNamePlusOddPlusWon.text =
+                            "${items.date} HT/FT  \nVIP ${items.odds} Odds WON"
+                    }
+                    !items.matchWon -> {
+                        matchState.setImageResource(R.drawable.match_lost_icon)
+                        datePlusVipNamePlusOddPlusWon.text =
+                            "${items.date} HT/FT  \nVIP ${items.odds} Odds LOST"
+                    }
                 }
-                !items.matchWon -> {
-                    matchState.setImageResource(R.drawable.match_lost_icon)
-                    datePlusVipNamePlusOddPlusWon.text =
-                        "${items.date} HT/FT  \nVIP ${items.odds} Odds LOST"
-                }
+                HT_FT_scores.text = "${items.HalfTimeScore}\n${items.FullTimeScore}"
+                HT_FT_scores.setCompoundDrawablesRelativeWithIntrinsicBounds(
+                    0,
+                    0,
+                   0,
+                    0
+                )
             }
+
             odds.text = items.odds
-            fixtures_inOdds.text = "HT/FT ${items.HalfAndFullTimeScoresInOdds}"
-            HT_FT_scores.text = "${items.HalfTimeScore}\n${items.FullTimeScore}"
+                fixtures_inOdds.text = "HT/FT ${items.HalfAndFullTimeScoresInOdds}"
+
+
 
         }
     }

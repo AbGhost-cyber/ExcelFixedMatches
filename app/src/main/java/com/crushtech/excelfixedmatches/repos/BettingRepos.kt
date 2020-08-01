@@ -17,17 +17,19 @@ class BettingRepos {
                     val date = docs.getString("date")
                     val teamOne = docs.getString("teamOne")
                     val teamTwo = docs.getString("teamTwo")
-                    val HalfAndFullTimeScoresInOdds = docs.getString("HalfAndFullTimeScoresInOdds")
+                    val halfAndFullTimeScoresInOdds = docs.getString("HalfAndFullTimeScoresInOdds")
                     val matchWon = docs.getBoolean("matchWon")
                     val odds = docs.getString("odds")
-                    val HalfTimeScore = docs.getString("HalfTimeScore")
-                    val FullTimeScore = docs.getString("FullTimeScore")
+                    val halfTimeScore = docs.getString("HalfTimeScore")
+                    val fullTimeScore = docs.getString("FullTimeScore")
+                    val isMatchPlayed = docs.getBoolean("isMatchPlayed")
 
 
                     val vipMatchesItem = VipMatchesItem(
                         leagueLogo!!, leagueName!!, date!!, teamOne!!,
-                        teamTwo!!, HalfAndFullTimeScoresInOdds!!,
-                        matchWon!!, odds!!, HalfTimeScore!!, FullTimeScore!!
+                        teamTwo!!, halfAndFullTimeScoresInOdds!!,
+                        matchWon!!, odds!!, halfTimeScore!!, fullTimeScore!!,
+                        isMatchPlayed!!
                     )
                     listData.add(vipMatchesItem)
                 }

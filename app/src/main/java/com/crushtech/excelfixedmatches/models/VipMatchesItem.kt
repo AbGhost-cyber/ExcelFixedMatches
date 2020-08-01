@@ -10,5 +10,6 @@ data class VipMatchesItem(
     val matchWon:Boolean,
     val odds:String,
     val HalfTimeScore:String,
-    val FullTimeScore:String
+    val FullTimeScore:String,
+    val isMatchPlayed:Boolean
 )

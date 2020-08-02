@@ -22,8 +22,7 @@
             android:id="@+id/vipImg"
             android:layout_width="70dp"
             android:layout_height="70dp"
-            android:layout_gravity="center"
-            android:src="@drawable/basketball_icon" />
+            android:layout_gravity="center" />
 
         <TextView
             android:id="@+id/vipTipName"

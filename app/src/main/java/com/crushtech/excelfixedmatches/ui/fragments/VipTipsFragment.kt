@@ -50,16 +50,15 @@ class VipTipsFragment : Fragment(R.layout.vip_tips_layout) {
         )
         vipItemsList!!.add(
             VipItems(
-                "HT/FT Tips",
+                "HT FT TIPS",
                 R.drawable.halftime_vip_icon
 
             )
         )
         vipItemsList!!.add(
             VipItems(
-                "Basketball VIP",
-                R.drawable.basketball_icon
-
+                "DAILY 20 ODD",
+                R.drawable.daily_20
             )
         )
         vipItemsList!!.add(
@@ -71,7 +70,7 @@ class VipTipsFragment : Fragment(R.layout.vip_tips_layout) {
         )
         vipItemsList!!.add(
             VipItems(
-                "Over/Under VIP",
+                "Over Under VIP",
                 R.drawable.under_over
 
             )

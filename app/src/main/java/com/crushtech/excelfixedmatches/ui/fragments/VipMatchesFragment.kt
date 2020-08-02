@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.crushtech.excelfixedmatches.R
 import com.crushtech.excelfixedmatches.adapter.VipItemsAdapter
 import com.crushtech.excelfixedmatches.adapter.VipMatchesItemAdapter
+import com.crushtech.excelfixedmatches.models.VipMatchesItem
 import com.crushtech.excelfixedmatches.ui.BettingMainActivity
 import com.crushtech.excelfixedmatches.viemodels.BettingViewmodel
 import com.google.firebase.FirebaseApp
@@ -32,10 +33,21 @@ class VipMatchesFragment : Fragment(R.layout.vip_matches_layout) {
     private lateinit var bettingViewmodel: BettingViewmodel
     private lateinit var vipMatchesItemsAdapter: VipMatchesItemAdapter
     private val args: VipMatchesFragmentArgs by navArgs()
+    private lateinit var path: String
+    private lateinit var splitPath: List<String>
+    private lateinit var sumofSplittedPath: String
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vipTipName = args.VipTipName
         (activity as BettingMainActivity).supportActionBar?.title = vipTipName
+        path = (activity as BettingMainActivity).supportActionBar?.title.toString()
+
+        //removes space between the tips
+        sumofSplittedPath = ""
+        splitPath = path.split(' ')
+        for (paths in splitPath.indices) {
+            sumofSplittedPath += splitPath[paths]
+        }
         bettingViewmodel = (activity as BettingMainActivity).bettingViewModel
         vipMatchesItemsAdapter = VipMatchesItemAdapter()
 
@@ -43,15 +55,26 @@ class VipMatchesFragment : Fragment(R.layout.vip_matches_layout) {
             adapter = vipMatchesItemsAdapter
             layoutManager = LinearLayoutManager(requireContext())
         }
-        bettingViewmodel.fetchCorrectScoresVIPFromFireBase().observe(viewLifecycleOwner, Observer {
-            vipMatchesItemsAdapter.differ.submitList(it)
-        })
+
+        // search depending on app bar title... easy yeah?
+        bettingViewmodel.fetchBettingDataFromRepo(sumofSplittedPath)
+            .observe(viewLifecycleOwner, Observer {
+                updateUI(it)
+                vipMatchesItemsAdapter.differ.submitList(it)
+            })
 
 
 
         setHasOptionsMenu(true)
     }
 
+    private fun updateUI(vipmatchItems: MutableList<VipMatchesItem>) {
+        if (vipmatchItems.isEmpty()) {
+            progressivebar.visibility = View.VISIBLE
+        } else {
+            progressivebar.visibility = View.GONE
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.refresh_menu, menu)
@@ -61,7 +84,7 @@ class VipMatchesFragment : Fragment(R.layout.vip_matches_layout) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.refresh_data -> {
-                bettingViewmodel.refreshData()
+                bettingViewmodel.refreshData(sumofSplittedPath)
             }
         }
         return super.onOptionsItemSelected(item)

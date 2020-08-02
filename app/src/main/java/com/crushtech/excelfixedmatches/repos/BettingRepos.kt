@@ -6,9 +6,9 @@ import com.crushtech.excelfixedmatches.models.VipMatchesItem
 import com.google.firebase.firestore.FirebaseFirestore
 
 class BettingRepos {
-    fun getCorrectScoresVIPDataFromFB(): LiveData<MutableList<VipMatchesItem>> {
+    fun getBettingDataFromFirebase(path:String): LiveData<MutableList<VipMatchesItem>> {
         val mutableData = MutableLiveData<MutableList<VipMatchesItem>>()
-        FirebaseFirestore.getInstance().collection("CorrectScoresVIP").get()
+        FirebaseFirestore.getInstance().collection(path).get()
             .addOnSuccessListener { result ->
                 val listData = mutableListOf<VipMatchesItem>()
                 for (docs in result) {
@@ -17,7 +17,8 @@ class BettingRepos {
                     val date = docs.getString("date")
                     val teamOne = docs.getString("teamOne")
                     val teamTwo = docs.getString("teamTwo")
-                    val halfAndFullTimeScoresInOdds = docs.getString("HalfAndFullTimeScoresInOdds")
+                    val halfAndFullTimeScoresInOdds =
+                        docs.getString("HalfAndFullTimeScoresInOdds")
                     val matchWon = docs.getBoolean("matchWon")
                     val odds = docs.getString("odds")
                     val halfTimeScore = docs.getString("HalfTimeScore")
@@ -37,6 +38,8 @@ class BettingRepos {
             }
         return mutableData
     }
+
+
 
 
 }

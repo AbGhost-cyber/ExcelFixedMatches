@@ -5,4 +5,5 @@
     <string name="msg_token_fmt">value gotten</string>
     <string name="msg_subscribed">subbed</string>
     <string name="msg_subscribe_failed">notSubbed</string>
+    <string name="About_sub">Last Updated: May, 17, 2020\n\nThe Following subscription plan is available:\n\nEach Betting VIP Tip is $30/3 Months\nTo Unlock all Tips, $120/3 Months\n\n\nInformation about the auto renewable nature of the subscription\n-Subscription period is 3 months. Every 3 Months your subscription renews.\n-Payment will be charged to your Google Play Account at confirmation of purchase.\n-Subscription will automatically renew unless auto-renew is turned off at least 24-hours before the end of the current period.\n-Account will be charged for renewal within 24-hours prior to the end of the current period.\n-You can cancel your subscription via this: link</string>
 </resources>

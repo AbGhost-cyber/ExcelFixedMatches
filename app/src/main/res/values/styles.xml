@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowAnimationStyle">@style/customDialogAnimation</item>
     </style>
     <dimen name="recycler_view_item_width">60dp</dimen>
 
@@ -16,5 +17,14 @@
         <item name="fontFamily">@font/bree_serif</item>
         <item name="length">LONG</item>
         <item name="cornerRadius">10dp</item>
+    </style>
+
+    <style name="CustomDialog" parent="Theme.MaterialComponents.Dialog">
+        <item name="android:windowAnimationStyle">@style/customDialogAnimation</item>
+    </style>
+
+    <style name="customDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
     </style>
 </resources>

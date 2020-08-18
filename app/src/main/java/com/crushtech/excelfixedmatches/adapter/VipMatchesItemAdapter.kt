@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.crushtech.excelfixedmatches.R
 import com.crushtech.excelfixedmatches.models.VipMatchesItem
 import kotlinx.android.synthetic.main.vip_matches_items.view.*
@@ -35,7 +34,6 @@ class VipMatchesItemAdapter : RecyclerView.Adapter<VipMatchesItemAdapter.VipMatc
         val items = differ.currentList[position]
         holder.itemView.apply {
 
-            Glide.with(context).load(items.leagueLogo).into(leagueLogo)
             league_Name.text = items.leagueName
             teams.text = "${items.teamOne} Vs ${items.teamTwo}"
 

@@ -27,7 +27,7 @@ class BettingRepos {
 
 
                     val vipMatchesItem = VipMatchesItem(
-                        leagueLogo!!, leagueName!!, date!!, teamOne!!,
+                        leagueName!!, date!!, teamOne!!,
                         teamTwo!!, halfAndFullTimeScoresInOdds!!,
                         matchWon!!, odds!!, halfTimeScore!!, fullTimeScore!!,
                         isMatchPlayed!!

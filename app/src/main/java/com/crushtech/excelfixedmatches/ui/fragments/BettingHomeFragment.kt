@@ -100,7 +100,7 @@ class BettingHomeFragment : Fragment(R.layout.betting_home_layout) {
         dialog.setContentView(R.layout.about_sub_layout)
         val dismissDialog = dialog.findViewById<ImageView>(R.id.close_sub_dialog)
         val sub_text = dialog.findViewById<TextView>(R.id.sub_text)
-        sub_text.makeLinks(Pair("Link", View.OnClickListener {
+        sub_text.makeLinks(Pair("link", View.OnClickListener {
             showBrowser("https://support.google.com/googleplay/answer/7018481?co=GENIE.Platform%3DAndroid&hl=en")
         }))
         dismissDialog.setOnClickListener {

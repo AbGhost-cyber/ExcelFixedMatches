@@ -1,9 +1,8 @@
 package com.crushtech.excelfixedmatches.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -14,19 +13,13 @@ import com.crushtech.excelfixedmatches.R
 import com.crushtech.excelfixedmatches.repos.BettingRepos
 import com.crushtech.excelfixedmatches.viemodels.BettingViewModelFactory
 import com.crushtech.excelfixedmatches.viemodels.BettingViewmodel
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.database.ktx.getValue
-import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val TAG = "BettingMainActivity"
 
 class BettingMainActivity : AppCompatActivity() {
+
     lateinit var bettingViewModel: BettingViewmodel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

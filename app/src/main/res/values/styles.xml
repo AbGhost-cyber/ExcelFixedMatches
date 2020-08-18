@@ -7,6 +7,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowAnimationStyle">@style/customDialogAnimation</item>
     </style>
+
     <dimen name="recycler_view_item_width">60dp</dimen>
 
 
@@ -14,6 +15,25 @@
         <item name="colorBackground">@color/colorPrimary</item>
         <item name="textColor">@android:color/white</item>
         <item name="iconRight">@drawable/internet_no_icon</item>
+        <item name="fontFamily">@font/bree_serif</item>
+        <item name="length">LONG</item>
+        <item name="cornerRadius">10dp</item>
+    </style>
+
+    <style name="alreadySubbed">
+        <item name="colorBackground">@color/colorPrimary</item>
+        <item name="textColor">@android:color/white</item>
+        <item name="iconRight">@drawable/match_won</item>
+        <item name="fontFamily">@font/bree_serif</item>
+        <item name="length">LONG</item>
+        <item name="cornerRadius">10dp</item>
+    </style>
+
+    <style name="customToast2">
+        <item name="colorBackground">@color/colorPrimary</item>
+        <item name="textColor">@android:color/white</item>
+        <item name="iconRight">@drawable/ic_baseline_clear_24</item>
+        <item name="iconTint">@android:color/white</item>
         <item name="fontFamily">@font/bree_serif</item>
         <item name="length">LONG</item>
         <item name="cornerRadius">10dp</item>

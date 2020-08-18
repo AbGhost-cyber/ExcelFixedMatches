@@ -1,7 +1,6 @@
 package com.crushtech.excelfixedmatches.models
 
 data class VipMatchesItem(
-    val leagueLogo:String,
     val leagueName:String,
     val date:String,
     val teamOne:String,

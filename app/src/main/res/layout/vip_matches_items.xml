@@ -32,12 +32,6 @@
                 android:textStyle="bold" />
         </com.google.android.material.card.MaterialCardView>
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/leagueLogo"
-            android:layout_width="50dp"
-            android:layout_height="70dp"
-            android:layout_below="@id/siblingCardView"
-            android:src="@drawable/bettinglogo" />
 
         <TextView
             android:id="@+id/league_Name"

@@ -2,7 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    app:cardCornerRadius="15dp"
+    app:cardCornerRadius="10dp"
     app:cardElevation="20dp"
     android:layout_marginTop="5dp"
     android:layout_marginStart="5dp"
@@ -12,6 +12,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="#222627"
         android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
@@ -35,15 +36,17 @@
 
         <TextView
             android:id="@+id/league_Name"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/siblingCardView"
             android:layout_centerInParent="true"
-            android:fontFamily="sans-serif-black"
+            android:background="@drawable/custom_bg"
+            android:fontFamily="sans-serif-condensed-medium"
             android:padding="20dp"
             android:textSize="17sp"
+            android:textAlignment="center"
             android:text="Turkey 1.League Play Off-2020"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@android:color/white"
             android:textStyle="bold" />
 
         <ImageView
@@ -54,36 +57,44 @@
             android:padding="20dp"
             android:id="@+id/matchState"
             android:src="@drawable/match_won" />
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:textSize="17sp"
-            android:padding="10dp"
+            android:background="@drawable/custom_bg"
             android:id="@+id/teams"
-            android:fontFamily="@font/bree_serif"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:padding="20dp"
             android:layout_centerInParent="true"
-            android:textColor="@android:color/black"
+            android:textAlignment="center"
+            android:textColor="#CCC9C9"
             android:layout_below="@id/league_Name"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
+
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:textSize="15sp"
             android:padding="20dp"
             android:id="@+id/fixtures_inOdds"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textAlignment="center"
             android:layout_centerInParent="true"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@android:color/white"
             android:layout_below="@id/teams"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
+
         <TextView
             android:layout_width="wrap_content"
-            android:textSize="15sp"
+            android:layout_marginEnd="5dp"
             android:padding="20dp"
             android:id="@+id/odds"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:text="26"
+            android:textColor="@android:color/white"
             android:layout_alignParentEnd="true"
-            android:textColor="@android:color/black"
+            android:textSize="17sp"
             android:layout_below="@id/league_Name"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/HT_FT_scores"
@@ -91,9 +102,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/teams"
             android:layout_alignParentEnd="true"
-            android:fontFamily="sans-serif-black"
+            android:layout_marginEnd="5dp"
             android:padding="20dp"
-            android:textColor="@android:color/black"
+            android:fontFamily="sans-serif-condensed-medium"
+            android:textColor="@android:color/white"
             android:textSize="15sp" />
 
     </RelativeLayout>

@@ -5,27 +5,15 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.crushtech.excelfixedmatches.R
-import com.crushtech.excelfixedmatches.adapter.VipItemsAdapter
 import com.crushtech.excelfixedmatches.adapter.VipMatchesItemAdapter
 import com.crushtech.excelfixedmatches.models.VipMatchesItem
 import com.crushtech.excelfixedmatches.ui.BettingMainActivity
 import com.crushtech.excelfixedmatches.viemodels.BettingViewmodel
-import com.google.firebase.FirebaseApp
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.QuerySnapshot
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.vip_matches_layout.*
 
 class VipMatchesFragment : Fragment(R.layout.vip_matches_layout) {
@@ -68,8 +56,8 @@ class VipMatchesFragment : Fragment(R.layout.vip_matches_layout) {
         setHasOptionsMenu(true)
     }
 
-    private fun updateUI(vipmatchItems: MutableList<VipMatchesItem>) {
-        if (vipmatchItems.isEmpty()) {
+    private fun updateUI(vipMatchItems: MutableList<VipMatchesItem>) {
+        if (vipMatchItems.isEmpty()) {
             progressivebar.visibility = View.VISIBLE
         } else {
             progressivebar.visibility = View.GONE

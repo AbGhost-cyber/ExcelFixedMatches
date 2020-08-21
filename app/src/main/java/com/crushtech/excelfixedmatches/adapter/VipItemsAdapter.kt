@@ -40,6 +40,7 @@ class VipItemsAdapter :
 
     }
 
+
     private var onItemClickListener: ((VipItems) -> Unit)? = null
 
     fun setOnItemClickListener(listener: (VipItems) -> Unit) {

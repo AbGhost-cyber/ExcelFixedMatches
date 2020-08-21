@@ -35,11 +35,12 @@ class VipMatchesItemAdapter : RecyclerView.Adapter<VipMatchesItemAdapter.VipMatc
         holder.itemView.apply {
 
             league_Name.text = items.leagueName
-            teams.text = "${items.teamOne} Vs ${items.teamTwo}"
+            teams.text = "${items.teamOne}  vs  ${items.teamTwo}"
 
             if (!items.isMatchPlayed) {
                 matchState.setImageResource(R.drawable.match_not_played_icon)
-                datePlusVipNamePlusOddPlusWon.text = "${items.date} HT/FT VIP"
+                datePlusVipNamePlusOddPlusWon.text =
+                    "${items.date} HT/FT VIP \n(New Tip Added.Good Luck-:)"
                 HT_FT_scores.text = null
                 HT_FT_scores.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     0,

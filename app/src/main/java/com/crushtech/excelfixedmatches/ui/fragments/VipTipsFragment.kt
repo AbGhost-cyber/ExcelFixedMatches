@@ -1,5 +1,6 @@
 package com.crushtech.excelfixedmatches.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -22,8 +23,8 @@ class VipTipsFragment : Fragment(R.layout.vip_tips_layout), PurchasesUpdatedList
         "special_vip",
         "correct_scores",
         "ht_ft_tips",
-        "daily_20_odd",
-        "correct_scores_vip",
+        "daily_20_odds",
+        "fixed_draw",
         "over_under_vip",
         "all_items_sub"
     )
@@ -88,31 +89,53 @@ class VipTipsFragment : Fragment(R.layout.vip_tips_layout), PurchasesUpdatedList
 
         })
 
+
         vipItemsAdapter.setOnItemClickListener { vipItems ->
             vipItemsAnimation.start()
             val bundle = Bundle().apply {
                 putSerializable("VipTipName", vipItems.name)
             }
             if (vipItems.name.contains("Special", true)) {
-                skuDetailForItemOne?.let { checkPurchaseState(itemOneIsOwned, it, bundle) }
+                val prefs = requireContext().getSharedPreferences("myItems", Context.MODE_PRIVATE)
+                itemOneIsOwned = prefs.getBoolean("special_vip", false)
+                skuDetailForItemOne?.let {
+                    checkPurchaseState(itemOneIsOwned, it, bundle)
+                }
             } else if (vipItems.name.startsWith("Correct", true)
                 && vipItems.name.endsWith("Scores", true)
             ) {
-                skuDetailForItemTwo?.let { checkPurchaseState(itemTwoIsOwned, it, bundle) }
+                val prefs = requireContext().getSharedPreferences("myItems", Context.MODE_PRIVATE)
+                itemTwoIsOwned = prefs.getBoolean("correct_scores", false)
+                skuDetailForItemTwo?.let {
+                    checkPurchaseState(itemTwoIsOwned, it, bundle)
+                }
             } else if (vipItems.name.contains("HT FT TIPS", true)) {
-                skuDetailForItemThree?.let { checkPurchaseState(itemThreeIsOwned, it, bundle) }
-            } else if (vipItems.name.contains("Daily", true)) {
-                skuDetailForItemFour?.let { checkPurchaseState(itemFourIsOwned, it, bundle) }
-            } else if (vipItems.name.startsWith("Correct", true)
-                && vipItems.name.endsWith("VIP", true)
-            ) {
+                val prefs = requireContext().getSharedPreferences("myItems", Context.MODE_PRIVATE)
+                itemThreeIsOwned = prefs.getBoolean("ht_ft_tips", false)
+                skuDetailForItemThree?.let {
+                    checkPurchaseState(itemThreeIsOwned, it, bundle)
+                }
+            } else if (vipItems.name.contains("DAILY 20 ODD", true)) {
+                val prefs = requireContext().getSharedPreferences("myItems", Context.MODE_PRIVATE)
+                itemFourIsOwned = prefs.getBoolean("daily_20_odds", false)
+                skuDetailForItemFour?.let {
+                    checkPurchaseState(itemFourIsOwned, it, bundle)
+                }
+            } else if (vipItems.name.startsWith("Fixed", true)) {
+                val prefs = requireContext().getSharedPreferences("myItems", Context.MODE_PRIVATE)
+                itemFiveIsOwned = prefs.getBoolean("fixed_draw", false)
                 skuDetailForItemFive?.let { checkPurchaseState(itemFiveIsOwned, it, bundle) }
+
             } else if (vipItems.name.contains("Over", true)) {
+                val prefs = requireContext().getSharedPreferences("myItems", Context.MODE_PRIVATE)
+                itemSixIsOwned = prefs.getBoolean("over_under_vip", false)
                 skuDetailForItemSix?.let { checkPurchaseState(itemSixIsOwned, it, bundle) }
             }
         }
 
         unlockAllItems.setOnClickListener {
+            val prefs = requireContext().getSharedPreferences("myItems", Context.MODE_PRIVATE)
+            allItemsOwned = prefs.getBoolean("all_items_sub", false)
             if (!allItemsOwned) {
                 val flowParams = allItemsSkuDetails?.let { skuDetails ->
                     BillingFlowParams.newBuilder()
@@ -122,8 +145,8 @@ class VipTipsFragment : Fragment(R.layout.vip_tips_layout), PurchasesUpdatedList
                 if (flowParams != null) {
                     billingClient.launchBillingFlow(activity as BettingMainActivity, flowParams)
                 }
-            } else {
-                showToast("all items already purchased", R.style.alreadySubbed)
+            } else if (allItemsOwned) {
+                showToast("All items already purchased..", R.style.alreadySubbed)
             }
         }
     }
@@ -139,26 +162,28 @@ class VipTipsFragment : Fragment(R.layout.vip_tips_layout), PurchasesUpdatedList
                     if (skuDetailList != null) {
                         for (item in skuDetailList.withIndex()) {
                             val skuItem = item.value
-                            if (skuItem.sku == "special_vip") {
-                                skuDetailForItemOne = skuItem
-                            }
-                            if (skuItem.sku == "correct_scores") {
-                                skuDetailForItemTwo = skuItem
-                            }
-                            if (skuItem.sku == "ht_ft_tips") {
-                                skuDetailForItemThree = skuItem
-                            }
-                            if (skuItem.sku == "daily_20_odd") {
-                                skuDetailForItemFour = skuItem
-                            }
-                            if (skuItem.sku == "correct_scores_vip") {
-                                skuDetailForItemFive = skuItem
-                            }
-                            if (skuItem.sku == "over_under_vip") {
-                                skuDetailForItemSix = skuItem
-                            }
-                            if (skuItem.sku == "all_items_sub") {
-                                allItemsSkuDetails = skuItem
+                            when (skuItem.sku) {
+                                "special_vip" -> {
+                                    skuDetailForItemOne = skuItem
+                                }
+                                "correct_scores" -> {
+                                    skuDetailForItemTwo = skuItem
+                                }
+                                "ht_ft_tips" -> {
+                                    skuDetailForItemThree = skuItem
+                                }
+                                "daily_20_odds" -> {
+                                    skuDetailForItemFour = skuItem
+                                }
+                                "fixed_draw" -> {
+                                    skuDetailForItemFive = skuItem
+                                }
+                                "over_under_vip" -> {
+                                    skuDetailForItemSix = skuItem
+                                }
+                                "all_items_sub" -> {
+                                    allItemsSkuDetails = skuItem
+                                }
                             }
                         }
                     }
@@ -205,7 +230,7 @@ class VipTipsFragment : Fragment(R.layout.vip_tips_layout), PurchasesUpdatedList
         )
         vipItemsList!!.add(
             VipItems(
-                "Correct Scores VIP",
+                "Fixed Draw",
                 R.drawable.correct_score_vip_icon
 
             )
@@ -235,9 +260,99 @@ class VipTipsFragment : Fragment(R.layout.vip_tips_layout), PurchasesUpdatedList
                     R.style.customToast2
                 )
             }
-            else -> {
-                showToast("Item not found or Google play billing error...", R.style.customToast2)
+            BillingClient.BillingResponseCode.ITEM_ALREADY_OWNED -> {
+                for (purchase in purchaseList!!) {
+                    when (purchase.sku) {
+                        "special_vip" -> {
+                            itemOneIsOwned = true
+                            requireContext().getSharedPreferences(
+                                "myItems", Context.MODE_PRIVATE
+                            )
+                                .edit().putBoolean("special_vip", itemOneIsOwned).apply()
+                        }
+                        "correct_scores" -> {
+                            itemTwoIsOwned = true
+                            requireContext().getSharedPreferences(
+                                "myItems", Context.MODE_PRIVATE
+                            )
+                                .edit().putBoolean("correct_scores", itemTwoIsOwned).apply()
+                        }
+                        "ht_ft_tips" -> {
+                            itemThreeIsOwned = true
+                            requireContext().getSharedPreferences(
+                                "myItems", Context.MODE_PRIVATE
+                            )
+                                .edit().putBoolean("ht_ft_tips", itemThreeIsOwned).apply()
+                        }
+                        "daily_20_odds" -> {
+                            itemFourIsOwned = true
+                            requireContext().getSharedPreferences(
+                                "myItems", Context.MODE_PRIVATE
+                            )
+                                .edit().putBoolean("daily_20_odds", itemFourIsOwned).apply()
+                        }
+                        "fixed_draw" -> {
+                            itemFiveIsOwned = true
+                            requireContext().getSharedPreferences(
+                                "myItems", Context.MODE_PRIVATE
+                            )
+                                .edit().putBoolean("fixed_draw", itemFiveIsOwned).apply()
+                        }
+                        "over_under_vip" -> {
+                            itemSixIsOwned = true
+                            requireContext().getSharedPreferences(
+                                "myItems", Context.MODE_PRIVATE
+                            )
+                                .edit().putBoolean("over_under_vip", itemSixIsOwned).apply()
+                        }
+                        "all_items_sub" -> {
+                            itemOneIsOwned = true
+                            itemTwoIsOwned = true
+                            itemThreeIsOwned = true
+                            itemFourIsOwned = true
+                            itemFiveIsOwned = true
+                            itemSixIsOwned = true
+                            allItemsOwned = true
+                            requireContext().getSharedPreferences(
+                                "myItems", Context.MODE_PRIVATE
+                            )
+                                .edit().putBoolean("special_vip", itemOneIsOwned).apply()
+
+                            requireContext().getSharedPreferences(
+                                "myItems", Context.MODE_PRIVATE
+                            )
+                                .edit().putBoolean("correct_scores", itemTwoIsOwned).apply()
+
+                            requireContext().getSharedPreferences(
+                                "myItems", Context.MODE_PRIVATE
+                            )
+                                .edit().putBoolean("ht_ft_tips", itemThreeIsOwned).apply()
+
+                            requireContext().getSharedPreferences(
+                                "myItems", Context.MODE_PRIVATE
+                            )
+                                .edit().putBoolean("daily_20_odds", itemFourIsOwned).apply()
+
+                            requireContext().getSharedPreferences(
+                                "myItems", Context.MODE_PRIVATE
+                            )
+                                .edit().putBoolean("fixed_draw", itemFiveIsOwned).apply()
+
+                            requireContext().getSharedPreferences(
+                                "myItems", Context.MODE_PRIVATE
+                            )
+                                .edit().putBoolean("over_under_vip", itemSixIsOwned).apply()
+                            requireContext().getSharedPreferences(
+                                "myItems", Context.MODE_PRIVATE
+                            )
+                                .edit().putBoolean("all_items_sub", allItemsOwned).apply()
+                        }
+                    }
+                }
+
+
             }
+
         }
     }
 
@@ -261,34 +376,97 @@ class VipTipsFragment : Fragment(R.layout.vip_tips_layout), PurchasesUpdatedList
             if (!JavaUtils.isNullOrEmpty(purchaseHistoryList)) {
                 for (purchase in purchaseHistoryList!!) {
                     for (items in skuList) {
-                        if (purchase.sku == "special_vip") {
-                            itemOneIsOwned = true
-                        }
-                        if (purchase.sku == "correct_scores") {
-                            itemTwoIsOwned = true
-                        }
-                        if (purchase.sku == "ht_ft_tips") {
-                            itemThreeIsOwned = true
-                        }
-                        if (purchase.sku == "daily_20_odd") {
-                            itemFourIsOwned = true
-                        }
-                        if (purchase.sku == "correct_scores_vip") {
-                            itemFiveIsOwned = true
-                        }
-                        if (purchase.sku == "over_under_vip") {
-                            itemSixIsOwned = true
-                        }
-                        if (purchase.sku == "all_items_sub") {
-                            itemOneIsOwned = true
-                            itemTwoIsOwned = true
-                            itemThreeIsOwned = true
-                            itemFourIsOwned = true
-                            itemFiveIsOwned = true
-                            itemSixIsOwned = true
-                            allItemsOwned = true
+                        when (purchase.sku) {
+                            "special_vip" -> {
+                                itemOneIsOwned = true
+                                requireContext().getSharedPreferences(
+                                    "myItems", Context.MODE_PRIVATE
+                                )
+                                    .edit().putBoolean("special_vip", itemOneIsOwned).apply()
+                            }
+                            "correct_scores" -> {
+                                itemTwoIsOwned = true
+                                requireContext().getSharedPreferences(
+                                    "myItems", Context.MODE_PRIVATE
+                                )
+                                    .edit().putBoolean("correct_scores", itemTwoIsOwned).apply()
+                            }
+                            "ht_ft_tips" -> {
+                                itemThreeIsOwned = true
+                                requireContext().getSharedPreferences(
+                                    "myItems", Context.MODE_PRIVATE
+                                )
+                                    .edit().putBoolean("ht_ft_tips", itemThreeIsOwned).apply()
+                            }
+                            "daily_20_odds" -> {
+                                itemFourIsOwned = true
+                                requireContext().getSharedPreferences(
+                                    "myItems", Context.MODE_PRIVATE
+                                )
+                                    .edit().putBoolean("daily_20_odds", itemFourIsOwned).apply()
+                            }
+                            "fixed_draw" -> {
+                                itemFiveIsOwned = true
+                                requireContext().getSharedPreferences(
+                                    "myItems", Context.MODE_PRIVATE
+                                )
+                                    .edit().putBoolean("fixed_draw", itemFiveIsOwned)
+                                    .apply()
+                            }
+                            "over_under_vip" -> {
+                                itemSixIsOwned = true
+                                requireContext().getSharedPreferences(
+                                    "myItems", Context.MODE_PRIVATE
+                                )
+                                    .edit().putBoolean("over_under_vip", itemSixIsOwned).apply()
+                            }
+                            "all_items_sub" -> {
+                                itemOneIsOwned = true
+                                itemTwoIsOwned = true
+                                itemThreeIsOwned = true
+                                itemFourIsOwned = true
+                                itemFiveIsOwned = true
+                                itemSixIsOwned = true
+                                allItemsOwned = true
+                                requireContext().getSharedPreferences(
+                                    "myItems", Context.MODE_PRIVATE
+                                )
+                                    .edit().putBoolean("special_vip", itemOneIsOwned).apply()
+
+                                requireContext().getSharedPreferences(
+                                    "myItems", Context.MODE_PRIVATE
+                                )
+                                    .edit().putBoolean("correct_scores", itemTwoIsOwned).apply()
+
+                                requireContext().getSharedPreferences(
+                                    "myItems", Context.MODE_PRIVATE
+                                )
+                                    .edit().putBoolean("ht_ft_tips", itemThreeIsOwned).apply()
+
+                                requireContext().getSharedPreferences(
+                                    "myItems", Context.MODE_PRIVATE
+                                )
+                                    .edit().putBoolean("daily_20_odds", itemFourIsOwned).apply()
+
+                                requireContext().getSharedPreferences(
+                                    "myItems", Context.MODE_PRIVATE
+                                )
+                                    .edit().putBoolean("fixed_draw", itemFiveIsOwned)
+                                    .apply()
+
+                                requireContext().getSharedPreferences(
+                                    "myItems", Context.MODE_PRIVATE
+                                )
+                                    .edit().putBoolean("over_under_vip", itemSixIsOwned).apply()
+                                requireContext().getSharedPreferences(
+                                    "myItems", Context.MODE_PRIVATE
+                                )
+                                    .edit().putBoolean("all_items_sub", allItemsOwned).apply()
+                            }
                         }
                     }
+
+
                 }
             }
         }
@@ -306,7 +484,7 @@ class VipTipsFragment : Fragment(R.layout.vip_tips_layout), PurchasesUpdatedList
                 .setSkuDetails(skuDetails)
                 .build()
             billingClient.launchBillingFlow(activity as BettingMainActivity, flowParams)
-        } else {
+        } else if (isPurchased) {
             findNavController().navigate(
                 R.id.action_vipTipsFragment_to_vipMatchesFragment,
                 bundle

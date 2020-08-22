@@ -40,7 +40,7 @@ class VipMatchesItemAdapter : RecyclerView.Adapter<VipMatchesItemAdapter.VipMatc
             if (!items.isMatchPlayed) {
                 matchState.setImageResource(R.drawable.match_not_played_icon)
                 datePlusVipNamePlusOddPlusWon.text =
-                    "${items.date} HT/FT VIP \n(New Tip Added.Good Luck-:)"
+                    "${items.date} ${items.vipName} \n(New Tip Added.Good Luck-:)"
                 HT_FT_scores.text = null
                 HT_FT_scores.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     0,
@@ -53,28 +53,29 @@ class VipMatchesItemAdapter : RecyclerView.Adapter<VipMatchesItemAdapter.VipMatc
                     items.matchWon -> {
                         matchState.setImageResource(R.drawable.match_won)
                         datePlusVipNamePlusOddPlusWon.text =
-                            "${items.date} HT/FT  \nVIP ${items.odds} Odds WON"
+                            "${items.date} ${items.vipName} VIP\n ${items.odds} Odds WON"
                     }
                     !items.matchWon -> {
                         matchState.setImageResource(R.drawable.match_lost_icon)
                         datePlusVipNamePlusOddPlusWon.text =
-                            "${items.date} HT/FT  \nVIP ${items.odds} Odds LOST"
+                            "${items.date} ${items.vipName} VIP\n ${items.odds} Odds LOST"
                     }
                 }
                 HT_FT_scores.text = "${items.HalfTimeScore}\n${items.FullTimeScore}"
                 HT_FT_scores.setCompoundDrawablesRelativeWithIntrinsicBounds(
                     0,
                     0,
-                   0,
+                    0,
                     0
                 )
             }
 
-            odds.text = items.odds
+            if (items.isCorrectScore) {
+                fixtures_inOdds.text = "Correct Score: ${items.correctScore}"
+            } else {
                 fixtures_inOdds.text = "HT/FT ${items.HalfAndFullTimeScoresInOdds}"
-
-
-
+            }
+            odds.text = items.odds
         }
     }
 
